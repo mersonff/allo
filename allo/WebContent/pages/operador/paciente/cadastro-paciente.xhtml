@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form>
+			<p:panel id="panel" header="Cadastro de Paciente"
+				style="margin-bottom:10px;">
+				<p:messages id="messages" />
+				<h:panelGrid columns="2" cellpadding="4">
+
+					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
+					<p:inputText id="numeroSus"
+						value="#{pacienteBean.paciente.numeroSus}" required="true"
+						label="numeroSus" size="6"
+						requiredMessage="Número do SUS: Campo obrigatório."
+						converterMessage="Número do SUS: Deve ser um número." />
+
+					<h:outputLabel for="nome" value="Nome: " />
+					<p:inputText id="nome" value="#{pacienteBean.paciente.nome}"
+						label="nome" size="10" />
+
+					<h:outputLabel for="sobrenome" value="Sobrenome: " />
+					<p:inputText id="sobrenome"
+						value="#{pacienteBean.paciente.sobrenome}" label="sobrenome" />
+
+					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
+					<p:inputMask id="dataNascimento"
+						value="#{pacienteBean.paciente.dataNascimento}"
+						label="dataNascimento" mask="99/99/9999" size="7"
+						requiredMessage="Data de Pedido: Campo obrigatório."
+						converterMessage="Data Pedido: A data inserida não é uma data válida">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</p:inputMask>
+
+					<h:outputLabel for="endereco" value="Endereço: " />
+					<p:inputText id="endereco"
+						value="#{pacienteBean.paciente.endereco}" label="endereco" />
+
+					<h:outputLabel for="localidade" value="Localidade: " />
+					<p:inputText id="localidade"
+						value="#{pacienteBean.paciente.localidade}" label="localidade"
+						size="10" />
+
+					<h:outputLabel for="sexo" value="Sexo: " />
+					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">
+						<f:selectItem itemLabel="Masculino" itemValue="M" />
+						<f:selectItem itemLabel="Feminino" itemValue="F" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+						actionListener="#{pacienteBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

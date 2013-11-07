@@ -1,0 +1,74 @@
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Recursos / Materiais Cadastrados" />
+				</div>
+
+				<p:dataTable id="dataTable" var="recurso"
+					value="#{recursoBean.recursos}" widgetVar="recursosTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{recursoBean.filteredRecursos}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="recursosTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="descricaoColumn" sortBy="#{recurso.descricao}"
+						filterBy="#{recurso.descricao}" headerText="Descrição"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{recurso.descricao}" />
+					</p:column>
+
+					<p:column id="quantidadeColumn" filterBy="#{recurso.quantidade}"
+						headerText="Quantidade" sortBy="#{recurso.quantidade}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{recurso.quantidade}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Recurso">
+							<f:setPropertyActionListener target="#{recursoBean.recurso}"
+								value="#{recurso}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idRecurso" value="#{recursoBean.recurso.idRecurso}" />
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{recursosBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

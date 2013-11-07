@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="panel" header="Cadastro de operador"
+				style="margin-bottom:10px;">
+				<p:messages id="messages" closable="true"/>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel for="login" value="Login: *" />
+					<p:inputText id="login" value="#{professorBean.professor.login}"
+						required="true" label="Login">
+					<f:validateLength minimum="6" maximum="12"/>
+					</p:inputText>
+
+					<h:outputLabel for="senha" value="Senha: *" />
+					<p:password id="senha" value="#{professorBean.professor.senha}"
+						feedback="true" required="true" label="Senha" />
+
+					<h:outputLabel for="Nome" value="Nome: *" />
+					<p:inputText id="nome" value="#{professorBean.professor.nome}"
+						required="true" label="Nome">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+
+					<p:commandButton value="Salvar" update="panel" id="ajax"
+						actionListener="#{professorBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

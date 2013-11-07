@@ -1,0 +1,287 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Exames Aguardando Resultado" />
+				</div>
+
+				<p:dataTable id="dataTable" var="baciloscopia"
+					value="#{baciloscopiaBean.baciloscopiaEmAberto}"
+					widgetVar="baciloscopiasTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{baciloscopiaBean.filteredBaciloscopias}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<div id="filtro">
+								<h:outputText value="Procurar em todos os campos " />
+								<p:inputText id="globalFilter"
+									onkeyup="baciloscopiasTable.filter()" style="width:150px" />
+							</div>
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{baciloscopia.paciente.numeroSus}"
+						style="text-align: center"
+						filterBy="#{baciloscopia.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{baciloscopia.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{baciloscopia.paciente.nome}"
+						style="text-align: center" headerText="Nome"
+						sortBy="#{baciloscopia.paciente.nome}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{baciloscopia.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn" sortBy="#{baciloscopia.dataPedido}"
+						style="text-align: center" filterBy="#{baciloscopia.dataPedido}"
+						headerText="Pedido em" filterMatchMode="startsWith">
+						<h:outputText value="#{baciloscopia.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
+						<h:outputText value="#{baciloscopia.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:pedido"
+							oncomplete="pedidoDialog.show()" icon="ui-icon-search"
+							title="Dados do Pedido">
+							<f:setPropertyActionListener value="#{baciloscopia}"
+								target="#{baciloscopiaBean.baciloscopia}" />
+						</p:commandButton>
+						<p:commandButton id="selectButton2" update=":form:resultado"
+							oncomplete="resultadoDialog.show()" icon="ui-icon-document"
+							title="Cadastrar Resultado">
+							<f:setPropertyActionListener value="#{baciloscopia}"
+								target="#{baciloscopiaBean.baciloscopia}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog
+					header="Pedido de #{baciloscopiaBean.baciloscopia.nomeTipo}"
+					widgetVar="pedidoDialog" resizable="false" id="pedido"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados do Paciente">
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Número do SUS: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
+									size="14" disabled="true" />
+
+								<h:outputText value="Nascido em: " />
+								<p:inputMask
+									value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
+									disabled="true" mask="99/99/9999" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputMask>
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="6">
+								<h:outputText value="Nome: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.nome}"
+									disabled="true" size="10" />
+
+								<h:outputText value="Sobrenome: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}"
+									disabled="true" />
+
+								<h:outputText value="Sexo: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.sexo}"
+									disabled="true" size="1" />
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Endereço: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.endereco}"
+									disabled="true" />
+
+								<h:outputText value="Localidade: " />
+								<p:inputText
+									value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
+									disabled="true" size="10" />
+							</h:panelGrid>
+						</p:fieldset>
+					</h:panelGrid>
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados de Pedido">
+
+							<h:panelGrid columns="2" cellpadding="4">
+
+								<h:outputText value="Data de Pedido: " />
+								<p:inputText value="#{baciloscopiaBean.baciloscopia.dataPedido}"
+									disabled="true" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputText>
+							</h:panelGrid>
+
+							<h:panelGrid columns="4" cellpadding="4">
+
+								<h:outputText value="Unidade de Saúde: " />
+								<p:inputText disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
+
+								<h:outputLabel for="prontuario" value="Prontuário:" />
+								<p:inputText disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.prontuario}"
+									label="Prontuário" />
+							</h:panelGrid>
+
+							<h:panelGrid columns="4" cellpadding="4">
+
+								<h:outputLabel for="materialClinico" value="Material Clínico: " />
+								<p:inputTextarea disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.materialClinico}"
+									label="Material Clínico" />
+
+								<h:outputLabel for="outros" value="Outros: " />
+								<p:inputTextarea disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.outros}" label="Outros" />
+							</h:panelGrid>
+
+							<h:panelGrid columns="2" cellpadding="4">
+
+								<h:outputLabel for="diagnostico" value="Diagnóstico: " />
+								<p:selectBooleanCheckbox disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
+
+								<h:outputLabel for="controleDeTratamento"
+									value="Controle de Tratamento: " />
+								<p:selectBooleanCheckbox disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
+
+								<h:outputLabel for="numeroDaAmostra" value="Número da Amostra: " />
+								<p:selectOneRadio disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}">
+									<f:selectItem itemLabel="1ª Amostra" itemValue="1" />
+									<f:selectItem itemLabel="2ª Amostra" itemValue="2" />
+								</p:selectOneRadio>
+
+								<h:outputText value="Mês da Amostra:" />
+								<p:inputText disabled="true"
+									value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
+									style="font-weight:bold" size="1" />
+
+							</h:panelGrid>
+						</p:fieldset>
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:dialog
+					header="Resultado de #{baciloscopiaBean.baciloscopia.nomeTipo}"
+					widgetVar="resultadoDialog" resizable="false" id="resultado"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:inputHidden id="idExame"
+						value="#{baciloscopiaBean.baciloscopia.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
+					<h:inputHidden id="unidadeDeSaude"
+						value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
+					<h:inputHidden id="dataPedido"
+						value="#{baciloscopiaBean.baciloscopia.dataPedido}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
+					<h:inputHidden id="prontuario"
+						value="#{baciloscopiaBean.baciloscopia.prontuario}" />
+					<h:inputHidden id="materialClinico"
+						value="#{baciloscopiaBean.baciloscopia.materialClinico}" />
+					<h:inputHidden id="outros"
+						value="#{baciloscopiaBean.baciloscopia.outros}" />
+					<h:inputHidden id="diagnostico"
+						value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
+					<h:inputHidden id="numeroDaAmostra"
+						value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}" />
+					<h:inputHidden id="controleDeTratamento"
+						value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
+					<h:inputHidden id="mesDaAmostra"
+						value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}" />
+
+					<p:fieldset legend="Dados do Resultado">
+
+						<h:panelGrid cellpadding="4" columns="2">
+
+							<h:outputText value="Aspecto do Escarro: " />
+							<p:selectManyCheckbox id="aspectoDoEscarro"
+								value="#{baciloscopiaBean.baciloscopia.aspectoDoEscarro}">
+								<f:selectItem itemLabel="Mucopurulento"
+									itemValue="Mucopurulento" />
+								<f:selectItem itemLabel="Purulento" itemValue="Purulento" />
+								<f:selectItem itemLabel="Sanguinolento"
+									itemValue="Sanguinolento" />
+								<f:selectItem itemLabel="Saliva" itemValue="Saliva" />
+							</p:selectManyCheckbox>
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="2">
+
+							<h:outputLabel for="negativo" value="Negativo: " />
+							<p:selectBooleanCheckbox id="negativo"
+								value="#{baciloscopiaBean.baciloscopia.negativo}"
+								label="Negativo" />
+
+							<h:outputLabel for="baar" value="1 a 9 BAAR: " />
+							<p:selectBooleanCheckbox id="baar"
+								value="#{baciloscopiaBean.baciloscopia.baar}" label="Baar" />
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="2">
+
+							<h:outputLabel for="positividade" value="" />
+							<p:selectOneRadio id="positividade"
+								value="#{baciloscopiaBean.baciloscopia.positividade}">
+								<f:selectItem itemLabel=" Positivo+ " itemValue="Positivo++" />
+								<f:selectItem itemLabel=" Positivo++ " itemValue="Positivo++" />
+								<f:selectItem itemLabel=" Positivo+++ " itemValue="Positivo+++" />
+							</p:selectOneRadio>
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="2">
+							<h:outputLabel for="observacoes" value="Observações: " />
+							<p:inputTextarea id="observacoes"
+								value="#{baciloscopiaBean.baciloscopia.observacoes}"
+								label="Observacoes" rows="4" cols="50" />
+						</h:panelGrid>
+					</p:fieldset>
+
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+						actionListener="#{baciloscopiaBean.atualizar()}"
+						styleClass="ui-priority-primary"
+						oncomplete="resultadoDialog.hide();" />
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

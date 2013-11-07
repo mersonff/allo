@@ -1,0 +1,41 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="panel" header="Pedido de Exame: Hb / Ht com Plaquetas"
+				style="margin-bottom:10px;">
+				<p:messages id="messages" />
+				<h:panelGrid columns="2">
+
+					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
+					<p:inputText id="numeroSus"
+						value="#{plaquetaBean.plaqueta.paciente.numeroSus}" required="true"
+						label="numeroSus" />
+
+					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
+					<p:inputMask id="dataPedido"
+						value="#{plaquetaBean.plaqueta.dataPedido}"
+						label="dataPedido" mask="99/99/9999">
+						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+					</p:inputMask>
+
+					<h:outputLabel for="leito" value="Leito: " />
+					<p:inputText id="leito" value="#{plaquetaBean.plaqueta.leito}"
+						label="leito" />
+
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+						actionListener="#{plaquetaBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

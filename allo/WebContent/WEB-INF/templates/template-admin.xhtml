@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Allo</title>
+	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+
+</h:head>
+<h:body>
+	<f:view locale="pt_BR">
+
+		<div id="cabecalho">
+			<h:form>
+
+				<p:growl id="messages" />
+
+				<p:menubar>
+
+					<f:facet name="options">
+						<div id="nome">
+							<h:outputText value="Sistema de Alocação de Recursos - Allo" />
+						</div>
+					</f:facet>
+
+					<p:submenu label="Novo">
+						<p:menuitem value="Professor"
+							url="/pages/admin/cadastro-professor.xhtml" />
+						<p:menuitem value="Recurso / Material"
+							url="/pages/admin/cadastro-recurso.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Pesquisar">
+						<p:menuitem value="Professores"
+							url="/pages/admin/listar-professores.xhtml" />
+						<p:menuitem value="Recursos"
+							url="/pages/admin/listar-recursos.xhtml" />
+						<p:menuitem value="Reservas"
+							url="/pages/admin/listar-reservas.xhtml" />
+					</p:submenu>
+
+					<p:menuitem value="Sair" icon="ui-icon-extlink"
+						action="#{logoutBean.sair()}" />
+
+				</p:menubar>
+			</h:form>
+		</div>
+
+		<div id="conteudo">
+
+			<div id="corpo">
+				<ui:insert name="corpo">Corpo da página</ui:insert>
+			</div>
+
+			<div id="rodape"></div>
+		</div>
+	</f:view>
+</h:body>
+</html>
