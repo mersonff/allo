@@ -56,7 +56,7 @@ public class LoginBean extends AbstractBean {
 					HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 					sessao.setAttribute("login", this.usuario.getLogin());
 					sessao.setAttribute("tipo", this.usuario.getTipo());
-					return "/pages/operador/home-operador.xhtml?faces-redirect=true";
+					return "/pages/professor/home-professor.xhtml?faces-redirect=true";
 				} else {
 					throw new Exception();
 				}

@@ -29,8 +29,8 @@
 						<div id="filtro">
 							<p:outputPanel>
 								<h:outputText value="Procurar em todos os campos:" />
-								<p:inputText id="globalFilter"
-									onkeyup="recursosTable.filter()" style="width:150px" />
+								<p:inputText id="globalFilter" onkeyup="recursosTable.filter()"
+									style="width:150px" />
 							</p:outputPanel>
 						</div>
 					</f:facet>
@@ -39,12 +39,6 @@
 						filterBy="#{recurso.descricao}" headerText="Descrição"
 						filterMatchMode="startsWith" style="text-align: center">
 						<h:outputText value="#{recurso.descricao}" />
-					</p:column>
-
-					<p:column id="quantidadeColumn" filterBy="#{recurso.quantidade}"
-						headerText="Quantidade" sortBy="#{recurso.quantidade}"
-						style="text-align: center" filterMatchMode="startsWith">
-						<h:outputText value="#{recurso.quantidade}" />
 					</p:column>
 
 					<p:column style="width:4%">
@@ -56,10 +50,11 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+				<p:confirmDialog header="Excluir Recurso" message="Tem certeza?"
 					widgetVar="confirmacao" id="excluir">
 
-					<h:inputHidden id="idRecurso" value="#{recursoBean.recurso.idRecurso}" />
+					<h:inputHidden id="idRecurso"
+						value="#{recursoBean.recurso.idRecurso}" />
 
 					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
 						<p:commandButton value="Sim" update="panel" id="ajax"

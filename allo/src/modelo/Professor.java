@@ -1,7 +1,11 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Professor {
@@ -11,8 +15,11 @@ public class Professor {
 	private String senha;
 	private String nome;
 
-	public Professor() {
+	@OneToMany
+	private List<Reserva> reservas;
 
+	public Professor() {
+		this.reservas = new ArrayList<Reserva>();
 	}
 
 	public String getLogin() {
@@ -37,6 +44,14 @@ public class Professor {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 
 }

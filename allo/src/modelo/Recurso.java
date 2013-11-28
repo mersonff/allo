@@ -16,12 +16,11 @@ public class Recurso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idRecurso;
 	private String descricao;
-	private int quantidade;
 
 	@OneToMany(mappedBy = "recurso")
 	private List<Reserva> reservas;
-	
-	public Recurso(){
+
+	public Recurso() {
 		this.reservas = new ArrayList<Reserva>();
 	}
 
@@ -41,20 +40,8 @@ public class Recurso {
 		this.descricao = descricao;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
 	public List<Reserva> getReservas() {
 		return reservas;
-	}
-
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
 	}
 
 }

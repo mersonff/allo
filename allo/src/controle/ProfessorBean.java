@@ -13,8 +13,10 @@ import dao.ProfessorJPADAO;
 public class ProfessorBean extends AbstractBean {
 
 	private Professor professor;
+	private Professor pAtivo;
 	private List<Professor> professores;
 	private List<Professor> filteredProfessores;
+	private String novaSenha;
 
 	public ProfessorBean() {
 		this.setProfessores(new ArrayList<Professor>());
@@ -32,6 +34,20 @@ public class ProfessorBean extends AbstractBean {
 		} else {
 			displayErrorMessageToUser("Esse Login já é utilizado.");
 		}
+
+	}
+
+	public void atualizar() {
+		ProfessorDAO operDAO = new ProfessorJPADAO();
+		operDAO.save(this.pAtivo);
+		displayInfoMessageToUser("Atualizado com Sucesso!");
+	}
+
+	public void alterarSenha() {
+		ProfessorDAO operDAO = new ProfessorJPADAO();
+		this.pAtivo.setSenha(novaSenha);
+		operDAO.save(this.pAtivo);
+		displayInfoMessageToUser("Atualizado com Sucesso!");
 
 	}
 
@@ -69,6 +85,22 @@ public class ProfessorBean extends AbstractBean {
 
 	public void setFilteredProfessores(List<Professor> filteredProfessores) {
 		this.filteredProfessores = filteredProfessores;
+	}
+
+	public Professor getPativo() {
+		return pAtivo;
+	}
+
+	public void setPativo(Professor pativo) {
+		this.pAtivo = pativo;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
 	}
 
 }

@@ -10,31 +10,30 @@ import dao.RecursoDAO;
 import dao.RecursoJPADAO;
 
 @ManagedBean
-public class RecursoBean extends AbstractBean{
-	
+public class RecursoBean extends AbstractBean {
+
 	private Recurso recurso;
 	private List<Recurso> recursos;
 	private List<Recurso> filteredRecursos;
 
-	
-	public RecursoBean(){
+	public RecursoBean() {
 		this.setRecursos(new ArrayList<Recurso>());
 		this.setRecurso(new Recurso());
 		pesquisarTodos();
 	}
-	
-	public void cadastrar(){
+
+	public void cadastrar() {
 		RecursoDAO operDAO = new RecursoJPADAO();
 		operDAO.save(this.recurso);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 	}
-	
-	public void pesquisarTodos(){
+
+	public void pesquisarTodos() {
 		RecursoDAO operDAO = new RecursoJPADAO();
 		this.recursos = operDAO.find();
 	}
-	
-	public void excluir(Recurso oper){
+
+	public void excluir(Recurso oper) {
 		RecursoDAO operDAO = new RecursoJPADAO();
 		operDAO.delete(oper);
 		displayInfoMessageToUser("Excluido com sucesso!");
@@ -63,6 +62,5 @@ public class RecursoBean extends AbstractBean{
 	public void setFilteredRecursos(List<Recurso> filteredRecursos) {
 		this.filteredRecursos = filteredRecursos;
 	}
-	
 
 }

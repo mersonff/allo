@@ -10,19 +10,14 @@
 
 			<p:panel id="panel" header="Cadastro de operador"
 				style="margin-bottom:10px;">
-				<p:messages id="messages" closable="true"/>
+				<p:messages id="messages" closable="true" />
 				<h:panelGrid columns="2">
 
 					<h:outputLabel for="descricao" value="Descrição: *" />
-					<p:inputText id="descricao" value="#{recursoBean.recurso.descricao}"
-						required="true" label="Descrição">
-						<f:validateLength minimum="3" maximum="50"/>
-					</p:inputText>
-					
-					<h:outputLabel for="quantidade" value="Quantidade: *" />
-					<p:inputText id="quantidade" value="#{recursoBean.recurso.quantidade}"
-						required="true" label="Quantidade" type="number">
-						<f:validateLength minimum="1" />
+					<p:inputText id="descricao"
+						value="#{recursoBean.recurso.descricao}" required="true"
+						label="Descrição">
+						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
 					<p:commandButton value="Salvar" update="panel" id="ajax"

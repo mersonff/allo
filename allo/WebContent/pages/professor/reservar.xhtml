@@ -1,0 +1,60 @@
+<ui:composition template="/WEB-INF/templates/template-professor.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form id="agendamento">
+
+			<p:panel id="panel" header="Reservar Recurso"
+				style="margin-bottom:10px;">
+				<p:messages id="msgs" closable="true" />
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
+
+					<h:outputLabel for="login" value="Login: *" />
+					<p:inputText id="login"
+						value="#{reservaBean.reserva.professor.login}" required="true"
+						label="Login" size="14" />
+
+					<h:outputText value="Data: *" />
+					<p:inputMask id="data" size="7" required="true" mask="99/99/9999"
+						value="#{reservaBean.reserva.data}" label="Data">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</p:inputMask>
+
+					<h:outputText value="Recurso: *" />
+					<p:selectOneMenu id="recurso" label="Recurso"
+						value="#{reservaBean.reserva.recurso.idRecurso}">
+						<f:selectItem itemLabel="Selecione" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{recursoBean.recursos}" var="r"
+							itemLabel="#{r.descricao}" itemValue="#{r.idRecurso}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Aula(s): *" />
+					<p:selectManyCheckbox id="aulas" required="true" label="Aula(s)"
+						value="#{reservaBean.reserva.aulas}" layout="pageDirection">
+						<f:selectItem itemLabel="Aula 1" itemValue="Aula 1" />
+						<f:selectItem itemLabel="Aula 2" itemValue="Aula 2" />
+						<f:selectItem itemLabel="Aula 3" itemValue="Aula 3" />
+						<f:selectItem itemLabel="Aula 4" itemValue="Aula 4" />
+						<f:selectItem itemLabel="Aula 5" itemValue="Aula 5" />
+					</p:selectManyCheckbox>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
+
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+						actionListener="#{reservaBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

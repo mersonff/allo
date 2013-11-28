@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-professor.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="perfil" styleClass="form">
+
+			<p:panel id="panel" header="Dados Pessoais"
+				style="margin-bottom:10px;text-align:center;">
+				<p:growl id="messages" />
+
+				<h:panelGrid cellpadding="4" style="text-align: left;">
+
+					<h:inputHidden id="senha" value="#{professorBean.pativo.senha}" />
+					<h:inputHidden value="#{professorBean.pativo.login}" />
+
+					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+						<h:outputLabel for="login" value="Login: *" />
+						<p:inputText id="login" value="#{professorBean.pativo.login}"
+							required="true" label="Login" disabled="true">
+
+						</p:inputText>
+
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" value="#{professorBean.pativo.nome}"
+							required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="4" columns="3" style="margin: 0 auto;">
+						<p:commandButton value="Atualizar" update=":perfil:panel"
+							id="ajax" actionListener="#{professorBean.atualizar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Cancelar"
+							action="/pages/professor/home-professor.xhtml" />
+						<p:commandButton id="selectButton" update=":dialog:password"
+							value="Alterar Senha" oncomplete="passwordDialog.show()"
+							title="Alterar Senha" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<h:form id="dialog">
+			<p:dialog widgetVar="passwordDialog" resizable="false" id="password"
+				showEffect="fade" hideEffect="explode" modal="true">
+
+				<h:panelGrid id="display" style="margin: 0 auto">
+
+					<h:inputHidden id="login" value="#{professorBean.pativo.login}"
+						label="Login" />
+					<h:inputHidden id="nome" value="#{professorBean.pativo.nome}"
+						label="Nome" />
+					<h:inputHidden id="senha" value="#{professorBean.pativo.senha}"
+						label="Senha" />
+
+
+					<p:fieldset legend="Alterar Senha" style="text-align:center;">
+						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel value="Senha Atual: " />
+							<p:password value="#{professorBean.pativo.senha}"
+								redisplay="true" label="Senha" disabled="true" />
+							<h:outputLabel value="Nova Senha: *" />
+							<p:password id="novaSenha" value="#{professorBean.novaSenha}"
+								redisplay="true" required="true" label="Nova Senha" />
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
+						actionListener="#{professorBean.alterarSenha()}"
+						styleClass="
+						ui-priority-primary"
+						oncomplete="passwordDialog.hide()" />
+					<p:commandButton value="Cancelar"
+						action="/pages/professor/home-professor.xhtml" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>
