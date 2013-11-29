@@ -5,7 +5,7 @@ body {
 }
 
 .ui-widget,.ui-widget .ui-widget {
-	font-size: 98%!important;
+	font-size: 98% !important;
 }
 
 #conteudo {
@@ -15,32 +15,34 @@ body {
 	margin: 0 auto;
 }
 
-#nome{
+#nome {
 	font-size: 20px;
 	font-weight: bolder;
 	color: #CD0000;
 	font-family: cursive;
 }
 
-#tableName{
+#nomeIndex {
+	font-size: 40px;
+	font-weight: bolder;
+	color: #CD0000;
+	font-family: cursive;
+}
+
+#tableName {
 	text-align: center;
 	margin-bottom: 10px;
 	font-weight: bolder;
 	font-size: 18px;
-	
 }
 
 #cabecalho {
 	margin-bottom: 1px;
 }
 
-#filtro{
-	text-align: right;
-}
-
-#clock{
-	margin-top: 60px;
-	margin-left: 610px;
+#perfil {
+	width: 400px;
+	margin: 10px auto;
 }
 
 #menubar {
@@ -53,33 +55,17 @@ body {
 	margin-bottom: 30px;
 }
 
-#agendamento {
-	width: 400px;
-	margin: 10px auto;
-	margin-bottom: 30px;
-}
-
 #corpo {
 	min-height: 400px;
 	margin: 10px;
 }
 
-#rodape {
-	
+#professor {
+	width: 400px;
+	margin: 10px auto;
 }
 
-.msg-error {
-	margin-left: 0;
-	list-style-type: none;
-	background-color: #FFCCCC;
-	padding: 8px;
-	border: 2px solid red;
-}
-
-.msg-sucesso {
-	margin-left: 0;
-	list-style-type: none;
-	background-color: #99FF99;
-	padding: 8px;
-	border: 2px solid green;
+#recurso {
+	width: 600px;
+	margin: 10px auto;
 }

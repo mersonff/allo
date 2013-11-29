@@ -19,9 +19,19 @@
 					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
-					emptyMessage="Nenhum exame encontrado com esses critérios."
+					emptyMessage="Nenhuma reserva encontrada."
 					filteredValue="#{reservaBean.reservasFiltradas}"
 					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<h:outputText value="Reservas Cadastradas" />
+					</f:facet>
+					
+					<p:column id="professorColumn"
+						filterBy="#{reserva.professor.nome}" headerText="Professor"
+						sortBy="#{reserva.professor.nome}" filterMatchMode="startsWith">
+						<h:outputText value="#{reserva.professor.nome}" />
+					</p:column>
 
 					<p:column id="recursoColumn"
 						filterBy="#{reserva.recurso.descricao}" headerText="Recurso"

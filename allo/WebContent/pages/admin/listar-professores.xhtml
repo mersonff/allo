@@ -12,27 +12,17 @@
 
 				<p:growl id="msgs" />
 
-				<div id="tableName">
-					<h:outputText value="Professores Cadastrados" />
-				</div>
-
 				<p:dataTable id="dataTable" var="professor"
 					value="#{professorBean.professores}" widgetVar="professorsTable"
 					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
-					emptyMessage="Nenhum exame encontrado com esses critérios."
+					emptyMessage="Nenhum professor encontrado."
 					filteredValue="#{professorBean.filteredProfessores}"
 					paginatorAlwaysVisible="false">
 
 					<f:facet name="header">
-						<div id="filtro">
-							<p:outputPanel>
-								<h:outputText value="Procurar em todos os campos:" />
-								<p:inputText id="globalFilter"
-									onkeyup="professorsTable.filter()" style="width:150px" />
-							</p:outputPanel>
-						</div>
+						<h:outputText value="Professores Cadastrados" />
 					</f:facet>
 
 					<p:column id="loginColumn" sortBy="#{professor.login}"

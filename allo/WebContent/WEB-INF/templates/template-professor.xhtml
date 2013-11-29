@@ -26,14 +26,11 @@
 					<p:menuitem value="Início" icon="ui-icon-home"
 						url="/pages/professor/home-professor.xhtml" />
 
-					<p:submenu label="Novo" icon="ui-icon-contact">
-						<p:menuitem value="Reserva" url="/pages/professor/reservar.xhtml" />
-					</p:submenu>
+					<p:menuitem value="Reserva" icon="ui-icon-plus"
+						url="/pages/professor/reservar.xhtml" />
 
-					<p:submenu label="Gerenciar" icon="ui-icon-gear">
-						<p:menuitem value="Perfil"
-							url="/pages/professor/perfil-professor.xhtml" />
-					</p:submenu>
+					<p:menuitem value="Perfil" icon="ui-icon-person"
+						url="/pages/professor/perfil-professor.xhtml" />
 
 					<p:menuitem value="Sair" icon="ui-icon-extlink"
 						action="#{logoutBean.sair()}" />
@@ -41,12 +38,14 @@
 				</p:menubar>
 
 			</h:form>
+			<div id="conteudo">
 
-			<div id="corpo">
-				<ui:insert name="corpo">Corpo da página</ui:insert>
+				<div id="corpo">
+					<ui:insert name="corpo">Corpo da página</ui:insert>
+				</div>
+
+				<div id="rodape"></div>
 			</div>
-
-			<div id="rodape"></div>
 		</div>
 	</f:view>
 </h:body>

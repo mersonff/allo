@@ -17,7 +17,6 @@ import dao.ReservaJPADAO;
 @ManagedBean
 public class ReservaBean extends AbstractBean {
 
-	private Professor pAtivo;
 	private Reserva reserva;
 	private List<Reserva> reservas;
 	private List<Reserva> reservasPorRecursos;
@@ -32,12 +31,12 @@ public class ReservaBean extends AbstractBean {
 	}
 
 	public void cadastrar() {
-		ReservaDAO operDAO = new ReservaJPADAO();
+		ReservaDAO reDAO = new ReservaJPADAO();
 		ProfessorDAO pDAO = new ProfessorJPADAO();
 		Professor p = pDAO.find(this.reserva.getProfessor().getLogin());
 		boolean verifica = verificaReserva(this.reserva);
 		if (p != null && verifica == true) {
-			operDAO.save(this.reserva);
+			reDAO.save(this.reserva);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			System.out.println(reservasPorRecursos);
 			this.reserva = new Reserva();
@@ -51,14 +50,15 @@ public class ReservaBean extends AbstractBean {
 	}
 
 	public void pesquisarTodos() {
-		ReservaDAO operDAO = new ReservaJPADAO();
-		this.reservas = operDAO.find();
+		ReservaDAO reDAO = new ReservaJPADAO();
+		this.reservas = reDAO.find();
 	}
 
-	public void excluir(Reserva oper) {
-		ReservaDAO operDAO = new ReservaJPADAO();
-		operDAO.delete(oper);
+	public void excluir() {
+		ReservaDAO reDAO = new ReservaJPADAO();
+		reDAO.delete(this.reserva);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.reservas = reDAO.find();
 	}
 
 	public Reserva getReserva() {
@@ -134,9 +134,14 @@ public class ReservaBean extends AbstractBean {
 	}
 
 	public List<Reserva> getReservasPorProfessor() {
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(true);
+		Professor prof = new Professor();
+		ProfessorDAO pDAO = new ProfessorJPADAO();
+		prof = pDAO.find(sessao.getAttribute("login"));
 		List<Reserva> temp = new ArrayList<Reserva>();
 		for (Reserva r : reservas) {
-			if (r.getProfessor().getLogin() == this.pAtivo.getLogin()) {
+			if (r.getProfessor().getLogin() == prof.getLogin()) {
 				temp.add(r);
 			}
 		}
@@ -147,19 +152,4 @@ public class ReservaBean extends AbstractBean {
 	public void setReservasPorProfessor(List<Reserva> reservasPorProfessor) {
 		this.reservasPorProfessor = reservasPorProfessor;
 	}
-
-	public Professor getPativo() {
-		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(true);
-		Professor temp = new Professor();
-		ProfessorDAO pDAO = new ProfessorJPADAO();
-		temp = pDAO.find(sessao.getAttribute("login"));
-		pAtivo = temp;
-		return pAtivo;
-	}
-
-	public void setPativo(Professor pativo) {
-		this.pAtivo = pativo;
-	}
-
 }

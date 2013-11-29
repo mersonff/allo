@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/WEB-INF/templates/template-professor.xhtml"
+<ui:composition
+	template="/WEB-INF/templates/template-admin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -17,28 +18,28 @@
 
 				<h:panelGrid cellpadding="4" style="text-align: left;">
 
-					<h:inputHidden id="senha" value="#{professorBean.pativo.senha}" />
-					<h:inputHidden value="#{professorBean.pativo.login}" />
+					<h:inputHidden id="senha" value="#{administradorBean.ativo.senha}" />
+					<h:inputHidden value="#{administradorBean.ativo.login}" />
 
 					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 						<h:outputLabel for="login" value="Login: *" />
-						<p:inputText id="login" value="#{professorBean.pativo.login}"
+						<p:inputText id="login" value="#{administradorBean.ativo.login}"
 							required="true" label="Login" disabled="true">
 
 						</p:inputText>
 
 						<h:outputLabel for="nome" value="Nome: *" />
-						<p:inputText id="nome" value="#{professorBean.pativo.nome}"
+						<p:inputText id="nome" value="#{administradorBean.ativo.nome}"
 							required="true" label="Nome">
 							<f:validateLength minimum="2" />
 						</p:inputText>
 					</h:panelGrid>
 					<h:panelGrid cellpadding="4" columns="3" style="margin: 0 auto;">
 						<p:commandButton value="Atualizar" update=":perfil:panel"
-							id="ajax" actionListener="#{professorBean.atualizar()}"
+							id="ajax" actionListener="#{administradorBean.atualizar()}"
 							styleClass="ui-priority-primary" />
 						<p:commandButton value="Cancelar"
-							action="/pages/professor/home-professor.xhtml" />
+							action="/pages/administrador/home-administrador.xhtml" />
 						<p:commandButton id="selectButton" update=":dialog:password"
 							value="Alterar Senha" oncomplete="passwordDialog.show()"
 							title="Alterar Senha" />
@@ -53,21 +54,21 @@
 
 				<h:panelGrid id="display" style="margin: 0 auto">
 
-					<h:inputHidden id="login" value="#{professorBean.pativo.login}"
+					<h:inputHidden id="login" value="#{administradorBean.ativo.login}"
 						label="Login" />
-					<h:inputHidden id="nome" value="#{professorBean.pativo.nome}"
+					<h:inputHidden id="nome" value="#{administradorBean.ativo.nome}"
 						label="Nome" />
-					<h:inputHidden id="senha" value="#{professorBean.pativo.senha}"
+					<h:inputHidden id="senha" value="#{administradorBean.ativo.senha}"
 						label="Senha" />
 
 
 					<p:fieldset style="text-align:center;">
 						<h:panelGrid columns="2" cellpadding="4">
 							<h:outputLabel value="Senha Atual: " />
-							<p:password value="#{professorBean.pativo.senha}"
+							<p:password value="#{administradorBean.ativo.senha}"
 								redisplay="true" label="Senha" disabled="true" />
 							<h:outputLabel value="Nova Senha: *" />
-							<p:password id="novaSenha" value="#{professorBean.novaSenha}"
+							<p:password id="novaSenha" value="#{administradorBean.novaSenha}"
 								redisplay="true" required="true" label="Nova Senha" />
 						</h:panelGrid>
 					</p:fieldset>
@@ -75,12 +76,12 @@
 
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
-						actionListener="#{professorBean.alterarSenha()}"
+						actionListener="#{administradorBean.alterarSenha()}"
 						styleClass="
 						ui-priority-primary"
 						oncomplete="passwordDialog.hide()" />
 					<p:commandButton value="Cancelar"
-						action="/pages/professor/home-professor.xhtml" />
+						action="/pages/admin/home-admin.xhtml" />
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>

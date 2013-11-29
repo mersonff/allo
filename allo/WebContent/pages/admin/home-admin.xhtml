@@ -19,9 +19,19 @@
 					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
-					emptyMessage="Nenhum exame encontrado com esses critérios."
+					emptyMessage="Nenhuma reserva encontrada."
 					filteredValue="#{reservaBean.reservasFiltradas}"
 					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<p:outputLabel value="Reservas para Hoje" />
+					</f:facet>
+
+					<p:column id="professorColumn" filterBy="#{reserva.professor.nome}"
+						headerText="Professor" sortBy="#{reserva.professor.nome}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{reserva.professor.nome}" />
+					</p:column>
 
 					<p:column id="recursoColumn"
 						filterBy="#{reserva.recurso.descricao}" headerText="Recurso"
@@ -43,28 +53,7 @@
 						filterMatchMode="startsWith">
 						<h:outputText value="#{reserva.aulas}" />
 					</p:column>
-
-					<p:column style="width:4%">
-						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
-							oncomplete="confirmacao.show()" title="Excluir Exame">
-							<f:setPropertyActionListener target="#{reservaBean.reserva}"
-								value="#{reserva}" />
-						</p:commandButton>
-					</p:column>
 				</p:dataTable>
-
-				<p:confirmDialog header="Excluir Reserva" message="Tem certeza?"
-					widgetVar="confirmacao" id="excluir">
-
-					<h:inputHidden id="idReserva"
-						value="#{reservaBean.reserva.idReserva}" />
-
-					<p:commandButton value="Sim" update="panel" id="ajax"
-						oncomplete="confirmacao.hide()"
-						actionListener="#{reservaBean.excluir()}" />
-					<p:button value="Não" onclick="confirmacao.hide();" />
-
-				</p:confirmDialog>
 
 			</p:panel>
 		</h:form>

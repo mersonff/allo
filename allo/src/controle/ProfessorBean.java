@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import modelo.Professor;
 import dao.ProfessorDAO;
@@ -88,6 +90,12 @@ public class ProfessorBean extends AbstractBean {
 	}
 
 	public Professor getPativo() {
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(true);
+		Professor temp = new Professor();
+		ProfessorDAO pDAO = new ProfessorJPADAO();
+		temp = pDAO.find(sessao.getAttribute("login"));
+		pAtivo = temp;
 		return pAtivo;
 	}
 

@@ -26,25 +26,28 @@
 						</div>
 					</f:facet>
 
-					<p:menuitem value="Início"
+					<p:menuitem value="Início" icon="ui-icon-home"
 						url="/pages/admin/home-admin.xhtml" />
 
 
-					<p:submenu label="Novo">
-						<p:menuitem value="Professor"
+					<p:submenu label="Novo" icon="ui-icon-plus">
+						<p:menuitem value="Professor" icon="ui-icon-person"
 							url="/pages/admin/cadastro-professor.xhtml" />
-						<p:menuitem value="Recurso / Material"
+						<p:menuitem value="Recurso / Material" icon="ui-icon-document"
 							url="/pages/admin/cadastro-recurso.xhtml" />
 					</p:submenu>
 
-					<p:submenu label="Pesquisar">
-						<p:menuitem value="Professores"
+					<p:submenu label="Pesquisar" icon="ui-icon-search">
+						<p:menuitem value="Professores" icon="ui-icon-person"
 							url="/pages/admin/listar-professores.xhtml" />
-						<p:menuitem value="Recursos"
+						<p:menuitem value="Recursos" icon="ui-icon-document"
 							url="/pages/admin/listar-recursos.xhtml" />
-						<p:menuitem value="Reservas"
+						<p:menuitem value="Reservas" icon="ui-icon-document"
 							url="/pages/admin/listar-reservas.xhtml" />
 					</p:submenu>
+
+					<p:menuitem value="Perfil" icon="ui-icon-person"
+						url="/pages/admin/perfil-admin.xhtml" />
 
 					<p:menuitem value="Sair" icon="ui-icon-extlink"
 						action="#{logoutBean.sair()}" />

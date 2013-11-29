@@ -6,23 +6,27 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="form">
+		<h:form id="recurso">
+			<p:messages id="messages" closable="true" />
 
-			<p:panel id="panel" header="Cadastro de operador"
+			<p:panel id="panel" header="Cadastro de Recurso"
 				style="margin-bottom:10px;">
-				<p:messages id="messages" closable="true" />
-				<h:panelGrid columns="2">
-
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+	
 					<h:outputLabel for="descricao" value="Descrição: *" />
 					<p:inputText id="descricao"
 						value="#{recursoBean.recurso.descricao}" required="true"
-						label="Descrição">
+						label="Descrição" size="50">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
+				</h:panelGrid>
 
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 					<p:commandButton value="Salvar" update="panel" id="ajax"
 						actionListener="#{recursoBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
 				</h:panelGrid>
 			</p:panel>
 

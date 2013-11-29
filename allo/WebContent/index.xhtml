@@ -6,12 +6,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Laboratório de Aracoiaba</title>
+	<title>Allo</title>
 	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-	<div id="conteudo2">
-
+	<div id="conteudo">
+		<div id="cabecalho">
+			<div id="nomeIndex">
+				<h:panelGrid width="100%" style="text-align: center">
+					<h:outputText value="Sistema de Alocação de Recursos - Allo" />
+				</h:panelGrid>
+			</div>
+		</div>
 		<p:messages autoUpdate="true" />
 		<h:form id="login">
 			<p:panel header="Login">

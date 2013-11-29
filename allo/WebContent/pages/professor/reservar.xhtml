@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="agendamento">
+		<h:form id="perfil">
+			<p:messages id="msgs" closable="true" />
 
-			<p:panel id="panel" header="Reservar Recurso"
+			<p:panel id="panel" header="Nova Reserva"
 				style="margin-bottom:10px;">
-				<p:messages id="msgs" closable="true" />
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
 
 					<h:outputLabel for="login" value="Login: *" />
@@ -47,7 +47,7 @@
 
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
 
-					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+					<p:commandButton value="Cadastrar" update="perfil" id="ajax"
 						actionListener="#{reservaBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
 					<p:commandButton value="Limpar" type="reset" />

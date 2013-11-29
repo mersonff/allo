@@ -15,13 +15,17 @@
 
 			<p:panel id="panel" style="margin-bottom:20px;">
 				<p:dataTable id="dataTable" var="reserva"
-					value="#{reservaBean.reservasPorProfessor}" widgetVar="reservasTable"
-					paginator="true" rows="10"
+					value="#{reservaBean.reservasPorProfessor}"
+					widgetVar="reservasTable" paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
-					emptyMessage="Nenhum exame encontrado com esses critérios."
+					emptyMessage="Nenhuma reserva encontrada."
 					filteredValue="#{reservaBean.reservasFiltradas}"
 					paginatorAlwaysVisible="false">
+					
+					<f:facet name="header">
+						<p:outputLabel value="Minhas Reservas" />
+					</f:facet>
 
 					<p:column id="recursoColumn"
 						filterBy="#{reserva.recurso.descricao}" headerText="Recurso"
@@ -46,7 +50,7 @@
 
 					<p:column style="width:4%">
 						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
-							oncomplete="confirmacao.show()" title="Excluir Exame">
+							oncomplete="confirmacao.show()" title="Excluir Reserva">
 							<f:setPropertyActionListener target="#{reservaBean.reserva}"
 								value="#{reserva}" />
 						</p:commandButton>
@@ -63,7 +67,6 @@
 						oncomplete="confirmacao.hide()"
 						actionListener="#{reservaBean.excluir()}" />
 					<p:button value="Não" onclick="confirmacao.hide();" />
-
 				</p:confirmDialog>
 
 			</p:panel>
