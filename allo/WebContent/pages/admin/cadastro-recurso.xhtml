@@ -13,6 +13,13 @@
 				style="margin-bottom:10px;">
 				<h:panelGrid columns="2" cellpadding="4"
 					style="margin: 0 auto;text-align:left;">
+					
+					<h:outputLabel for="codigo" value="Código: *" />
+					<p:inputText id="codigo"
+						value="#{recursoBean.recurso.codigo}" required="true"
+						label="Código" size="14">
+						<f:validateLength minimum="3" maximum="20" />
+					</p:inputText>
 	
 					<h:outputLabel for="descricao" value="Descrição: *" />
 					<p:inputText id="descricao"
@@ -23,7 +30,7 @@
 				</h:panelGrid>
 
 				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
-					<p:commandButton value="Salvar" update="panel" id="ajax"
+					<p:commandButton value="Salvar" update="recurso" id="ajax"
 						actionListener="#{recursoBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
 					<p:commandButton value="Limpar" type="reset" />

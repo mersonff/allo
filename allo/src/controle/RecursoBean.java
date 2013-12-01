@@ -23,20 +23,27 @@ public class RecursoBean extends AbstractBean {
 	}
 
 	public void cadastrar() {
-		RecursoDAO operDAO = new RecursoJPADAO();
-		operDAO.save(this.recurso);
-		displayInfoMessageToUser("Cadastrado com sucesso!");
+		RecursoDAO recDAO = new RecursoJPADAO();
+		Recurso r = recDAO.find(this.recurso.getCodigo());
+		if (r == null) {
+			recDAO.save(this.recurso);
+			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.recurso = new Recurso();
+		} else {
+			displayErrorMessageToUser("Já existe um recurso cadastrado com esse código.");
+		}
 	}
 
 	public void pesquisarTodos() {
-		RecursoDAO operDAO = new RecursoJPADAO();
-		this.recursos = operDAO.find();
+		RecursoDAO recDAO = new RecursoJPADAO();
+		this.recursos = recDAO.find();
 	}
 
-	public void excluir(Recurso oper) {
-		RecursoDAO operDAO = new RecursoJPADAO();
-		operDAO.delete(oper);
+	public void excluir() {
+		RecursoDAO recDAO = new RecursoJPADAO();
+		recDAO.delete(this.recurso);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.recursos = recDAO.find();
 	}
 
 	public Recurso getRecurso() {

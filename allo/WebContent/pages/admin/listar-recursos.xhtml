@@ -25,9 +25,15 @@
 						<h:outputText value="Recursos / Materiais Cadastrados" />
 					</f:facet>
 
+					<p:column id="codigoColumn" filterBy="#{recurso.codigo}"
+						headerText="Código do Recurso" sortBy="#{recurso.codigo}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{recurso.codigo}" />
+					</p:column>
+
 					<p:column id="descricaoColumn" sortBy="#{recurso.descricao}"
 						filterBy="#{recurso.descricao}" headerText="Descrição"
-						filterMatchMode="startsWith" style="text-align: center">
+						filterMatchMode="startsWith">
 						<h:outputText value="#{recurso.descricao}" />
 					</p:column>
 
@@ -43,13 +49,12 @@
 				<p:confirmDialog header="Excluir Recurso" message="Tem certeza?"
 					widgetVar="confirmacao" id="excluir">
 
-					<h:inputHidden id="idRecurso"
-						value="#{recursoBean.recurso.idRecurso}" />
+					<h:inputHidden id="codigo" value="#{recursoBean.recurso.codigo}" />
 
 					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
 						<p:commandButton value="Sim" update="panel" id="ajax"
 							oncomplete="confirmacao.hide()"
-							actionListener="#{recursosBean.excluir()}" />
+							actionListener="#{recursoBean.excluir()}" />
 						<p:button value="Não" onclick="confirmacao.hide();" />
 					</h:panelGrid>
 				</p:confirmDialog>

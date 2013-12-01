@@ -33,6 +33,12 @@
 						<h:outputText value="#{reserva.professor.nome}" />
 					</p:column>
 
+					<p:column id="codigoColumn" filterBy="#{reserva.recurso.codigo}"
+						headerText="Código do Recurso" sortBy="#{reserva.recurso.codigo}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{reserva.recurso.codigo}" />
+					</p:column>
+
 					<p:column id="recursoColumn"
 						filterBy="#{reserva.recurso.descricao}" headerText="Recurso"
 						sortBy="#{reserva.recurso.descricao}" filterMatchMode="startsWith">

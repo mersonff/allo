@@ -1,8 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background: url("../resources/images/bg.png") fixed no-repeat;
-	background-size: 100% 100%;
+	background-color: #ef473e;
 }
 
 .ui-widget,.ui-widget .ui-widget {
@@ -17,17 +16,18 @@ body {
 }
 
 #nome {
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: bolder;
 	color: #CD0000;
-	font-family: cursive;
+	font-family: Verdana;
+	margin-right: 10px;
 }
 
 #nomeIndex {
 	font-size: 40px;
 	font-weight: bolder;
 	color: white;
-	font-family: cursive;
+	font-family: Verdana;
 }
 
 #tableName {
@@ -43,6 +43,11 @@ body {
 
 #perfil {
 	width: 400px;
+	margin: 10px auto;
+}
+
+#reserva {
+	width: 600px;
 	margin: 10px auto;
 }
 

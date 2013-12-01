@@ -27,10 +27,10 @@ public class ProfessorBean extends AbstractBean {
 	}
 
 	public void cadastrar() {
-		ProfessorDAO operDAO = new ProfessorJPADAO();
-		Professor p = operDAO.find(this.professor.getLogin());
+		ProfessorDAO profDAO = new ProfessorJPADAO();
+		Professor p = profDAO.find(this.professor.getLogin());
 		if (p == null) {
-			operDAO.save(this.professor);
+			profDAO.save(this.professor);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.professor = new Professor();
 		} else {
@@ -40,29 +40,29 @@ public class ProfessorBean extends AbstractBean {
 	}
 
 	public void atualizar() {
-		ProfessorDAO operDAO = new ProfessorJPADAO();
-		operDAO.save(this.pAtivo);
+		ProfessorDAO profDAO = new ProfessorJPADAO();
+		profDAO.save(this.pAtivo);
 		displayInfoMessageToUser("Atualizado com Sucesso!");
 	}
 
 	public void alterarSenha() {
-		ProfessorDAO operDAO = new ProfessorJPADAO();
+		ProfessorDAO profDAO = new ProfessorJPADAO();
 		this.pAtivo.setSenha(novaSenha);
-		operDAO.save(this.pAtivo);
+		profDAO.save(this.pAtivo);
 		displayInfoMessageToUser("Atualizado com Sucesso!");
 
 	}
 
 	public void pesquisarTodos() {
-		ProfessorDAO operDAO = new ProfessorJPADAO();
-		this.professores = operDAO.find();
+		ProfessorDAO profDAO = new ProfessorJPADAO();
+		this.professores = profDAO.find();
 	}
 
 	public void excluir() {
-		ProfessorDAO operDAO = new ProfessorJPADAO();
-		operDAO.delete(this.professor);
+		ProfessorDAO profDAO = new ProfessorJPADAO();
+		profDAO.delete(this.professor);
 		displayInfoMessageToUser("Excluido com sucesso!");
-		this.professores = operDAO.find();
+		this.professores = profDAO.find();
 	}
 
 	public Professor getProfessor() {

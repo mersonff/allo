@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="perfil">
+		<h:form id="reserva">
 			<p:messages id="msgs" closable="true" />
 
 			<p:panel id="panel" header="Nova Reserva"
@@ -26,12 +26,12 @@
 					</p:inputMask>
 
 					<h:outputText value="Recurso: *" />
-					<p:selectOneMenu id="recurso" label="Recurso"
-						value="#{reservaBean.reserva.recurso.idRecurso}">
+					<p:selectOneMenu id="codigo" label="Recurso"
+						value="#{reservaBean.reserva.recurso.codigo}">
 						<f:selectItem itemLabel="Selecione" itemValue=""
 							noSelectionOption="true" />
 						<f:selectItems value="#{recursoBean.recursos}" var="r"
-							itemLabel="#{r.descricao}" itemValue="#{r.idRecurso}" />
+							itemLabel="#{r.codigo} - #{r.descricao}" itemValue="#{r.codigo}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Aula(s): *" />
@@ -47,7 +47,7 @@
 
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
 
-					<p:commandButton value="Cadastrar" update="perfil" id="ajax"
+					<p:commandButton value="Cadastrar" update="reserva" id="ajax"
 						actionListener="#{reservaBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
 					<p:commandButton value="Limpar" type="reset" />

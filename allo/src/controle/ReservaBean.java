@@ -47,6 +47,7 @@ public class ReservaBean extends AbstractBean {
 				displayErrorMessageToUser("Login Inexistente!");
 			}
 		}
+
 	}
 
 	public void pesquisarTodos() {
@@ -80,8 +81,8 @@ public class ReservaBean extends AbstractBean {
 	public List<Reserva> getReservasPorRecursos() {
 		List<Reserva> temp = new ArrayList<Reserva>();
 		for (Reserva r : reservas) {
-			if (r.getRecurso().getIdRecurso() == this.reserva.getRecurso()
-					.getIdRecurso()) {
+			if (r.getRecurso().getCodigo()
+					.equals(this.reserva.getRecurso().getCodigo())) {
 				temp.add(r);
 			}
 		}
@@ -99,11 +100,9 @@ public class ReservaBean extends AbstractBean {
 			if (re.getData().equals(r.getData())
 					&& re.getAulas().toString().equals(r.getAulas().toString())
 					|| re.getData().equals(r.getData())
-					&& re.getAulas().toString()
-							.contains(r.getAulas().toString())
+					&& re.getAulas().contains(r.getAulas()) 
 					|| re.getData().equals(r.getData())
-					&& r.getAulas().toString()
-							.contains(re.getAulas().toString())) {
+					&& r.getAulas().contains(re.getAulas())) {
 				bool = false;
 			}
 		}

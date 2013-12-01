@@ -34,7 +34,7 @@ public class Reserva {
 	private Professor professor;
 
 	@OneToOne
-	@JoinColumn(name = "idRecurso")
+	@JoinColumn(name = "codigo")
 	private Recurso recurso;
 
 	private boolean hoje;
