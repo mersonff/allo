@@ -1,7 +1,8 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background-color: white;
+	background: url("../resources/images/bg.png") fixed no-repeat;
+	background-size: 100% 100%;
 }
 
 .ui-widget,.ui-widget .ui-widget {
@@ -25,7 +26,7 @@ body {
 #nomeIndex {
 	font-size: 40px;
 	font-weight: bolder;
-	color: #CD0000;
+	color: white;
 	font-family: cursive;
 }
 
