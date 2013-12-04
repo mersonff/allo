@@ -25,19 +25,15 @@ public class Reserva {
 
 	@Temporal(TemporalType.DATE)
 	private Date data;
-
-	@ElementCollection
-	private List<String> aulas;
-
 	@ManyToOne
 	@JoinColumn(name = "login")
 	private Professor professor;
-
 	@OneToOne
 	@JoinColumn(name = "codigo")
 	private Recurso recurso;
-
 	private boolean hoje;
+	@ElementCollection
+	private List<String> aulas;
 
 	public Reserva() {
 		this.professor = new Professor();
@@ -76,14 +72,6 @@ public class Reserva {
 		this.data = data;
 	}
 
-	public List<String> getAulas() {
-		return aulas;
-	}
-
-	public void setAulas(List<String> aulas) {
-		this.aulas = aulas;
-	}
-
 	public boolean isHoje() {
 		Calendar dataReserva = new GregorianCalendar();
 		dataReserva.setTime(data);
@@ -104,7 +92,13 @@ public class Reserva {
 	public void setHoje(boolean hoje) {
 		this.hoje = hoje;
 	}
-	
-	
+
+	public void setAulas(List<String> aulas) {
+		this.aulas = aulas;
+	}
+
+	public List<String> getAulas() {
+		return aulas;
+	}
 
 }

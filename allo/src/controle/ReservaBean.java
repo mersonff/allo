@@ -98,12 +98,24 @@ public class ReservaBean extends AbstractBean {
 		boolean bool = true;
 		for (Reserva re : reservas) {
 			if (re.getData().equals(r.getData())
-					&& re.getAulas().toString().equals(r.getAulas().toString())
-					|| re.getData().equals(r.getData())
-					&& re.getAulas().contains(r.getAulas()) 
-					|| re.getData().equals(r.getData())
-					&& r.getAulas().contains(re.getAulas())) {
+					&& re.getRecurso().getCodigo()
+							.equals(r.getRecurso().getCodigo())
+					&& re.getAulas().toString().equals(r.getAulas().toString())) {
 				bool = false;
+			} else if (re.getData().equals(r.getData())
+					&& re.getRecurso().getCodigo()
+							.equals(r.getRecurso().getCodigo())) {
+				for (String s : r.getAulas()) {
+					if (re.getAulas().contains(s)) {
+						bool = false;
+					}
+				}
+				for (String s : re.getAulas()) {
+					if (r.getAulas().contains(s)) {
+						bool = false;
+					}
+				}
+
 			}
 		}
 		return bool;
